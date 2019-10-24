@@ -33,12 +33,14 @@
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
+          @if(auth()->user()->isAdmin())
           <li class="{{ 'dashboard' == request()->path() ? 'active' : '' }}">
             <a href="/dashboard">
               <i class="now-ui-icons design_app"></i>
               <p>Dashboard</p>
             </a>
           </li>
+          @endif
           <li>
             <a href="./icons.html">
               <i class="now-ui-icons education_atom"></i>

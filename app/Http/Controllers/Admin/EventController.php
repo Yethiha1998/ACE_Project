@@ -46,4 +46,22 @@ class EventController extends Controller
         $event->save();
         return redirect('events')->with('status','Event has successfully created.');
     }
+
+    public function eventedit(Request $request, $id){
+        $events = Event::findOrFail($id);
+        return view('admin.event-edit')->with('event',$events);
+    }
+
+    public function eventupdate(Request $request, $id){
+        $events = Event::find($id);
+        $events->update($request->all());
+        dd('work');
+        // $events->event_name=$request->input('event_name');
+        // $->role =$request->input('role');
+        // $users->update();
+
+        return redirect('/role-register')->with('status','Your Data is Updated');
+    }
+
+    
 }

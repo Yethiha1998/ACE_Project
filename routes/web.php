@@ -20,7 +20,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['middleware'=>['auth','role']], function(){
+Route::group(['middleware'=>['role']], function(){
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     });
@@ -34,5 +34,7 @@ Route::group(['middleware'=>['auth','role']], function(){
     
     Route::get('/events','Admin\EventController@index');
     Route::post('/create_event', 'Admin\EventController@store');
+    Route::get('/event/{eventid}','Admin\EventController@eventedit');
+    Route::get('/admin/event-update/{eventid}','Admin\EventController@eventupdate');
 
 });

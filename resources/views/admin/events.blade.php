@@ -94,7 +94,7 @@
                             <td>Oud-Turnhout</td>
                             <td class="text-right">$36,738</td>
                             <td class="text-right">
-                                <a href="#" class="btn btn-success">EDIT</a>
+                                <a href="#" class="btn btn-success"><a href="/admin/event-update/1">EDIT</a></a>
                             </td>
                             <td class="text-right">
                                 <form action="#" method="post">
