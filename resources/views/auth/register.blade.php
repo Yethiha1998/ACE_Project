@@ -96,7 +96,7 @@
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="organizer" id="organizer" {{ old('organizer') ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="remember">
+                                    <label class="form-check-label" for="organizer">
                                         {{ __('Register as Organizer') }}
                                     </label>
                                 </div>
