@@ -20,7 +20,7 @@
         </button>
       </div>
 
-      <form action="/create_event" method="POST">
+      <form action="/create_event" method="POST" enctype="multipart/form-data">
             <div class="modal-body">
                 {{ csrf_field()}}
                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button><label class="col-form-label">Choose image:</label></button>
+                    <button class="btn btn-primary"><label class="col-form-label">Choose image:</label></button>
                     <input type="file" name="image" class="form-control">
                 </div>
 
@@ -78,33 +78,38 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table">
-                        <thead class=" text-primary">
+                        <thead class="text-primary">
                             <th>ID</th>
                             <th>Event Name</th>
                             <th>Time</th>
                             <th>Date</th>
-                            <th class="text-right">EDIT</th>
+                            <th>Image</th>
+                            <th>EDIT</th>
                             <th class="text-right">DELETE</th>
                             </thead>
                     <tbody>
-                   
+                    @foreach ($event as $row)
                         <tr>
-                            <td>BBB</td>
-                            <td>Niger</td>
-                            <td>Oud-Turnhout</td>
-                            <td class="text-right">$36,738</td>
-                            <td class="text-right">
-                                <a href="#" class="btn btn-success"><a href="/admin/event-update/1">EDIT</a></a>
+                            <td>{{ $row->eventid }}</td>
+                            <td>{{ $row->event_name }}</td>
+                            <td>{{ $row->time }}</td>
+                            <td>{{ $row->date }}</td>
+                            <td> 
+                                <img class="img-responsive" src="/images/{{$row->image}}" width="200px" height="150px">
+                            </td>
+                            <td>
+                               <a href="/event-edit/{{ $row->eventid }}" class="btn btn-success">EDIT</a>
                             </td>
                             <td class="text-right">
-                                <form action="#" method="post">
+                                <form action="/event-delete/{{ $row->eventid }}" method="post">
                                     <input type="hidden" name="id">
-                                        
+                                    {{csrf_field()}}
+                                    {{method_field('DELETE')}}
                                     <button type="submit" class="btn btn-danger">DELETE</button>
                                 </form>
                             </td>
                         </tr>
-                    
+                    @endforeach
                     </tbody>
                     </table>
                 </div>

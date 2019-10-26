@@ -10,57 +10,90 @@ class EventController extends Controller
 {
     public function index()
     {
-        return view('admin.events');
+        $event = Event::all();
+        return view('admin.events')->with('event',$event);
     }
 
     public function store(Request $request)
     {
+
+        $request_all = $request->all();
+        
+        $this->validate($request,[
+            'event_name'=>'required',
+            'time'=>'required',
+            'date'=>'required',
+            'image'=>'required',
+            'user_id'=>'required',
+            ]);
+
+            $event_name = $request->input('event_name');
+            $time = $request->input('time');
+            $date = $request->input('date');
+            
+            $image = $request->file('image');
+            $img_orginalname = $image->getClientOriginalName();
+            $img_extension = $image->getClientOriginalExtension();
+            $img_temp_name = uniqid() . "." . $img_extension;
+            $file_name = public_path("images",$image->getClientOriginalName()) . "/" . $img_temp_name;
+            move_uploaded_file($_FILES["image"]["tmp_name"],$file_name  );
+
+            $user_id = $request->input('user_id');
+
+        
         $event = new Event;
-        $event->event_name = $request->input('event_name');
-        $event->time = $request->input('time');
-        $event->date = $request->input('date');
-
-
-        $this->validate($request, [
-
-            'image' => 'required',
-            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-
-        ]);
-    
-        if($request->hasfile('image'))
-        {
-
-            foreach($request->file('image') as $image)
-            {
-                $name=$image->getClientOriginalName();
-                $image->move(public_path().'/images/', $name);  
-                $data = $name;  
-            }
-        }
-
-        $event->image=json_encode($data);
-
-        $event->user_id = $request->input('user_id');
+        $event->event_name = $event_name;
+        $event->time = $time;
+        $event->date = $date;
+        $event->image= $img_temp_name;
+        $event->user_id = $user_id;
 
         $event->save();
-        return redirect('events')->with('status','Event has successfully created.');
+        return redirect('event')->with('status','Event has successfully created.');
     }
 
     public function eventedit(Request $request, $id){
-        $events = Event::findOrFail($id);
-        return view('admin.event-edit')->with('event',$events);
+        $event = Event::findOrFail($id);   
+        return view('admin.event-update')->with('events',$event);
+    
     }
 
-    public function eventupdate(Request $request, $id){
-        $events = Event::find($id);
-        $events->update($request->all());
-        dd('work');
-        // $events->event_name=$request->input('event_name');
-        // $->role =$request->input('role');
-        // $users->update();
 
-        return redirect('/role-register')->with('status','Your Data is Updated');
+    public function eventupdate(Request $request, $id){
+       
+        
+            $event = Event::findOrFail($id);
+            $event->update($request->all());
+            
+            $this->validate($request,[
+                'event_name'=>'required',
+                'time'=>'required',
+                'date'=>'required',
+                //'image'=>'required',
+            ]);
+                        
+            if ($request->hasFile('image'))
+            {
+                $image = $request->file('image');
+                $img_orginalname = $image->getClientOriginalName();
+                $img_extension = $image->getClientOriginalExtension();
+                $img_temp_name = uniqid() . "." . $img_extension;
+                $file_name = public_path("images",$image->getClientOriginalName()) . "/" . $img_temp_name;
+                move_uploaded_file($_FILES["image"]["tmp_name"],$file_name  ); 
+                $event->image= $img_temp_name;                     
+            }
+        
+            $event->save();
+            //return redirect()->route('event')->with('status','Event has successfully Updated.');
+            return redirect()->action('Admin\EventController@index');
+    }
+
+    public function eventdelete($id){
+        
+        $event = Event::findOrFail($id);
+        $event->delete();
+
+        return redirect('event')->with('status','Your Data is Deleted');
     }
 
     

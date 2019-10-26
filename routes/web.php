@@ -26,15 +26,15 @@ Route::group(['middleware'=>['role']], function(){
     });
 
     Route::get('/role-register','Admin\DashboardController@registered');
-    
     Route::get('/role-edit/{id}','Admin\DashboardController@registeredit');
     Route::put('/role-register-update/{id}','Admin\DashboardController@registerupdate');
     Route::delete('/role-delete/{id}','Admin\DashboardController@registerdelete');
 
     
-    Route::get('/events','Admin\EventController@index');
+    Route::get('/event','Admin\EventController@index');
     Route::post('/create_event', 'Admin\EventController@store');
-    Route::get('/event/{eventid}','Admin\EventController@eventedit');
-    Route::get('/admin/event-update/{eventid}','Admin\EventController@eventupdate');
+    Route::get('/event-edit/{eventid}','Admin\EventController@eventedit');
+    Route::put('/event-update/{eventid}','Admin\EventController@eventupdate');
+    Route::delete('/event-delete/{id}','Admin\EventController@eventdelete');
 
 });
