@@ -64,8 +64,14 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    {
-        $organizer = $data['organizer'] == 'on' ? '2' : '3';
+    {   
+        if(isset($_REQUEST['organizer'])){
+            $organizer = 2;
+        }
+        else{
+            $organizer = 3;
+        }
+        // $organizer = $data['organizer'] == 'on' ? '2' : '3';
         
         return User::create([
             'username' => $data['username'],
