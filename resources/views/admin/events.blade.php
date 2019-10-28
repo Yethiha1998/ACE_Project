@@ -95,7 +95,7 @@
                             <td>{{ $row->time }}</td>
                             <td>{{ $row->date }}</td>
                             <td> 
-                                <img class="img-responsive" src="/images/{{$row->image}}" width="200px" height="150px">
+                                <img class="img-responsive" src="/images/{{$row->image}}" width="200px" height="180px">
                             </td>
                             <td>
                                <a href="/event-edit/{{ $row->eventid }}" class="btn btn-success">EDIT</a>

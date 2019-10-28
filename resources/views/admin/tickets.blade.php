@@ -20,15 +20,27 @@
         </button>
       </div>
 
-      <form action="/create_event" method="POST">
+      <form action="/create_ticket" method="POST">
             <div class="modal-body">
                 {{ csrf_field()}}
+                
+                <div class="form-group">
+                    <label for="eventid" class="col-form-label">Choose event:</label>
+                        <select name="eventid" class="form-control">
+                            @foreach($eventquery as $row)
+                            <option value="<?php echo $row->eventid; ?>">{{ $row->event_name }}</option>
+                            {{ $row->eventid }}
+                            @endforeach
+                        </select>
+                </div>                
+
+
                 <div class="form-group">
                     <label for="ticket_type" class="col-form-label">Choose ticket type</label>
                         <select name="ticket_type" class="form-control">
-                            <option value="Early Bird">Early Bird</option>
+                            <option value="Regular">Regular</option>
                             <option value="VIP">VIP</option>
-                            <option value="VVIP">Customer</option>
+                            <option value="VVIP">VVIP</option>
                         </select>
                 </div>
 
@@ -37,18 +49,6 @@
                     <input type="text" name="price" class="form-control" id="price">
                 </div>
 
-                <?php
-                    if($row->event_id=='1'){
-                        echo "-Admin";
-                    }
-                    elseif($row->event_id=='2'){
-                        echo "-Organizer";
-                    }
-                    else{
-                        echo "-Customer";
-                    }
-                ?>
-                
             </div>
 
             <div class="modal-footer">
@@ -61,13 +61,11 @@
   </div>
 </div>
 
-
-
 <div class="row">
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Event
+                <h4 class="card-title">Ticket
                 <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">Create</button>
                 </h4>
                 
@@ -83,31 +81,34 @@
                     <table class="table">
                         <thead class=" text-primary">
                             <th>ID</th>
-                            <th>Event Name</th>
-                            <th>Time</th>
-                            <th>Date</th>
+                            <th>Event ID</th>
+                            <th>Ticket Type</th>
+                            <th>Price</th>
                             <th class="text-right">EDIT</th>
                             <th class="text-right">DELETE</th>
                             </thead>
                     <tbody>
-                   
+                    
+                    @foreach ($ticket as $row)    
                         <tr>
-                            <td>BBB</td>
-                            <td>Niger</td>
-                            <td>Oud-Turnhout</td>
-                            <td class="text-right">$36,738</td>
+                            <td>{{ $row->ticketid}}</td>    
+                            <td>{{ $row->eventid}}</td>
+                            <td>{{ $row->ticket_type }}</td>
+                            <td>{{ $row->price }}</td>
                             <td class="text-right">
-                                <a href="#" class="btn btn-success">EDIT</a>
+                               <a href="/ticket-edit/{{ $row->ticketid }}" class="btn btn-success">EDIT</a>
                             </td>
                             <td class="text-right">
-                                <form action="#" method="post">
+                                <form action="/ticket-delete/{{ $row->ticketid }}" method="post">
                                     <input type="hidden" name="id">
-                                        
+                                    {{csrf_field()}}
+                                    {{method_field('DELETE')}}
                                     <button type="submit" class="btn btn-danger">DELETE</button>
                                 </form>
                             </td>
                         </tr>
-                    
+                    @endforeach
+
                     </tbody>
                     </table>
                 </div>

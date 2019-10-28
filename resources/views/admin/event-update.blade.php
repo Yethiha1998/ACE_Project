@@ -39,10 +39,13 @@
 
                             <div class="form-group">
                                 <button><label class="col-form-label">Choose image:</label></button>
+                                <?php
+                                    echo $events->image;
+                                ?>
                                 <input type="file" name="image" class="form-control" >
                             </div>
                             <button type="submit" class="btn btn-success">Update</button>
-                            <a href="/events" class="btn btn-danger">Cancel</a>
+                            <a href="/event" class="btn btn-danger">Cancel</a>
                          </form>
                         </div>
                    </div>

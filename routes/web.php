@@ -37,4 +37,12 @@ Route::group(['middleware'=>['role']], function(){
     Route::put('/event-update/{eventid}','Admin\EventController@eventupdate');
     Route::delete('/event-delete/{id}','Admin\EventController@eventdelete');
 
+    Route::get('/ticket','Admin\TicketController@index');
+    Route::post('/create_ticket', 'Admin\TicketController@store');
+    Route::get('/ticket-edit/{ticketid}','Admin\TicketController@ticketedit');
+    Route::put('/ticket-update/{ticketid}','Admin\TicketController@ticketupdate');
+    Route::delete('/ticket-delete/{id}','Admin\TicketController@ticketdelete');
+
+
+
 });

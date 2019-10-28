@@ -84,8 +84,9 @@ class EventController extends Controller
             }
         
             $event->save();
-            //return redirect()->route('event')->with('status','Event has successfully Updated.');
-            return redirect()->action('Admin\EventController@index');
+            return redirect('event')->with('status','Event has successfully Updated.');
+
+            //return redirect()->action('Admin\EventController@index');
     }
 
     public function eventdelete($id){
