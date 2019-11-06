@@ -6,9 +6,25 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Gate;
-
+use  App\Models\Event;
 class DashboardController extends Controller
 {
+
+    // public function index()
+    // {
+    //     $event = Event::all();
+    //     return view('/dashboard')->with('event',$event);
+        
+    // }
+
+    public function dashboard(){
+        $event = Event::all();
+        return view('admin.dashboard')->with('event',$event);
+        return view('admin.dashboard');
+    }
+
+    
+
     public function registered(){
         if(!Gate::allows('isAdmin')){
             abort(404,"Sorry, You can do this action");

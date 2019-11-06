@@ -31,8 +31,5 @@ class CreateTicketTable extends Migration
     public function down()
     {
         Schema::dropIfExists('ticket');
-        $table->dropForeign('table_eventid_foreign');
-        $table->dropIndex('table_eventid_index');
-        $table->dropColumn('eventid');
-    }
+}
 }

@@ -24,23 +24,25 @@
   <div class="wrapper ">
     <div class="sidebar" data-color="orange"><!--Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"-->
       <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+        <a href="/welcome" class="simple-text logo-mini">
           CT
         </a>
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+        <a href="/welcome" class="simple-text logo-normal">
           Admin Panel
         </a>
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
           
-          <li class="{{ 'dashboard' == request()->path() ? 'active' : '' }}">
+          
+          @if(Auth::user()->role=='1'){
+            <li class="{{ 'dashboard' == request()->path() ? 'active' : '' }}">
             <a href="/dashboard">
               <i class="now-ui-icons design_app"></i>
               <p>Dashboard</p>
             </a>
           </li>
-          <li class="{{ 'event' == request()->path() ? 'active' : '' }}">
+            <li class="{{ 'event' == request()->path() ? 'active' : '' }}">
             <a href="/event">
               <i class="now-ui-icons ui-1_bell-53"></i>
               <p>Events</p>
@@ -52,6 +54,48 @@
               <p>Tickets</p>
             </a>
           </li>
+          }
+          @elseif(Auth::user()->role=='2'){
+            <li class="{{ 'dashboard' == request()->path() ? 'active' : '' }}">
+            <a href="/dashboard">
+              <i class="now-ui-icons design_app"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+            <li class="{{ 'event' == request()->path() ? 'active' : '' }}">
+            <a href="/event">
+              <i class="now-ui-icons ui-1_bell-53"></i>
+              <p>Events</p>
+            </a>
+          </li>
+          <li class="{{ 'ticket' == request()->path() ? 'active' : '' }}">
+            <a href="/ticket">
+              <i class="now-ui-icons ui-1_bell-53"></i>
+              <p>Tickets</p>
+            </a>
+          </li>
+            <li class="">
+            <a href="/frontend/index">
+              <i class="now-ui-icons ui-1_bell-53"></i>
+              <p>Booking List</p>
+            </a>
+          </li>
+          }
+          @else
+            <li class="">
+            <a href="/booking">
+              <i class="now-ui-icons ui-1_bell-53"></i>
+              <p>Booking</p>
+            </a>
+          </li>
+          <li class="">
+            <a href="/frontend/index">
+              <i class="now-ui-icons ui-1_bell-53"></i>
+              <p>Booking List</p>
+            </a>
+          </li>
+          
+          @endif
 
           @can('isAdmin')
           <li class="{{ 'role-register' == request()->path() ? 'active' : '' }}">

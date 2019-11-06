@@ -38,10 +38,12 @@
                             </div>
 
                             <div class="form-group">
-                                <button><label class="col-form-label">Choose image:</label></button>
+                                <button><label class="col-form-label">Choose image:</label></button><br>
+                                <img class="img-responsive" src="/images/{{$events->image}}" width="200px" height="180px">
                                 <?php
                                     echo $events->image;
                                 ?>
+                                
                                 <input type="file" name="image" class="form-control" >
                             </div>
                             <button type="submit" class="btn btn-success">Update</button>

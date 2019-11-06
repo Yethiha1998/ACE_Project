@@ -19,18 +19,22 @@
                 <div class="table-responsive">
                     <table class="table">
                         <thead class=" text-primary">
-                            <th>Name</th>
-                            <th>Country</th>
-                            <th>City</th>
-                            <th class="text-right">Salary</th>
+                            <th>Event_Name</th>
+                            <th>Time</th>
+                            <th>Date</th>
+                            <th class="text-right">Image</th>
                             </thead>
                     <tbody>
+                    @foreach ($event as $row)
                         <tr>
-                            <td>Dakota Rice</td>
-                            <td>Niger</td>
-                            <td>Oud-Turnhout</td>
-                            <td class="text-right">$36,738</td>
+                            <td>{{ $row->event_name }}</td>
+                            <td>{{ $row->time }}</td>
+                            <td>{{ $row->date }}</td>
+                            <td class="text-right"> 
+                                <img class="img-responsive" src="/images/{{$row->image}}" width="200px" height="180px">
+                            </td>
                         </tr>
+                    @endforeach
                     </tbody>
                     </table>
                 </div>
