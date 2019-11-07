@@ -50,6 +50,7 @@ class BookingController extends Controller
     {
         $events = DB::select('select * from event');
         $tickets = DB::select('select * from ticket');
+        
         return view('frontend.booking')
             ->with('tickets', $tickets)
                 ->with('events', $events);

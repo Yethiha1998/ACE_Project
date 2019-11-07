@@ -11,7 +11,9 @@
   <div class="row featurette">
 	<div class="col-md-7">
 	  <h2 class="featurette-heading">Contact Us Page</h2>
-      <p></p>
+      <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam accusantium incidunt est dolor alias! Minus odit, consequatur eius quia temporibus velit, ut, magni animi deleniti dignissimos iste fugit incidunt delectus.
+      </p>
 	</div>
 	<div class="col-md-5">
 	 

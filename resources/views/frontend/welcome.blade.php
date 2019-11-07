@@ -9,7 +9,7 @@
 
 		<div class="col-sm-4">
 			<div class="thumbnail">
-				<img src="/images/{{$event->image}}" style="height:150px; width:100%">
+				<img src="/images/{{$event->image}}" style="height:250px; width:100%">
 				<div class="caption">
 					<table style="width:100%">
 						<tr >

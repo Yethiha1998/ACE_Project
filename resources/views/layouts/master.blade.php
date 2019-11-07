@@ -24,37 +24,53 @@
   <div class="wrapper ">
     <div class="sidebar" data-color="orange"><!--Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"-->
       <div class="logo">
+      
+      @if(Auth::user()->role=='1')
         <a href="/welcome" class="simple-text logo-mini">
           CT
         </a>
         <a href="/welcome" class="simple-text logo-normal">
           Admin Panel
         </a>
+      
+      @elseif(Auth::user()->role=='2')
+        <a href="/welcome" class="simple-text logo-mini">
+          CT
+        </a>
+        <a href="/welcome" class="simple-text logo-normal">
+          Organizer Panel
+        </a>
+      
+      @else
+        <a href="/welcome" class="simple-text logo-mini">
+          CT
+        </a>
+        <a href="/welcome" class="simple-text logo-normal">
+          User Panel
+        </a>
+      @endif
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
           
           
-          @if(Auth::user()->role=='1'){
+          @if(Auth::user()->role=='1')
             <li class="{{ 'dashboard' == request()->path() ? 'active' : '' }}">
             <a href="/dashboard">
               <i class="now-ui-icons design_app"></i>
               <p>Dashboard</p>
             </a>
-          </li>
-            <li class="{{ 'event' == request()->path() ? 'active' : '' }}">
-            <a href="/event">
-              <i class="now-ui-icons ui-1_bell-53"></i>
-              <p>Events</p>
+            </li>
+
+          <li class="{{ '/frontend/index' == request()->path() ? 'active' : '' }}">
+            <a href="/frontend/index">
+              <i class="now-ui-icons files_paper"></i>
+              <p>Reports</p>
             </a>
           </li>
-          <li class="{{ 'ticket' == request()->path() ? 'active' : '' }}">
-            <a href="/ticket">
-              <i class="now-ui-icons ui-1_bell-53"></i>
-              <p>Tickets</p>
-            </a>
-          </li>
-          }
+
+            
+          
           @elseif(Auth::user()->role=='2'){
             <li class="{{ 'dashboard' == request()->path() ? 'active' : '' }}">
             <a href="/dashboard">
@@ -62,6 +78,7 @@
               <p>Dashboard</p>
             </a>
           </li>
+          @can('isOrganizer')
             <li class="{{ 'event' == request()->path() ? 'active' : '' }}">
             <a href="/event">
               <i class="now-ui-icons ui-1_bell-53"></i>
@@ -70,27 +87,28 @@
           </li>
           <li class="{{ 'ticket' == request()->path() ? 'active' : '' }}">
             <a href="/ticket">
-              <i class="now-ui-icons ui-1_bell-53"></i>
+              <i class="now-ui-icons shopping_tag-content"></i>
               <p>Tickets</p>
             </a>
           </li>
-            <li class="">
+          @endcan
+            <li class="{{ '/frontend/index' == request()->path() ? 'active' : '' }}">
             <a href="/frontend/index">
-              <i class="now-ui-icons ui-1_bell-53"></i>
-              <p>Booking List</p>
+              <i class="now-ui-icons files_paper"></i>
+              <p>Reports</p>
             </a>
           </li>
           }
           @else
-            <li class="">
+            <li class="{{ 'booking' == request()->path() ? 'active' : '' }}">
             <a href="/booking">
-              <i class="now-ui-icons ui-1_bell-53"></i>
+              <i class="now-ui-icons shopping_cart-simple"></i>
               <p>Booking</p>
             </a>
           </li>
-          <li class="">
+          <li class="{{ 'frontend/index' == request()->path() ? 'active' : '' }}">
             <a href="/frontend/index">
-              <i class="now-ui-icons ui-1_bell-53"></i>
+              <i class="now-ui-icons shopping_cart-simple"></i>
               <p>Booking List</p>
             </a>
           </li>

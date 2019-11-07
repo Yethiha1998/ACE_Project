@@ -28,7 +28,7 @@
 
                   <?php 
                     $loginUser = Auth::user();
-                    if($loginUser->role == 2){
+                    if($loginUser->role == 2 || $loginUser->role == 1){
                     ?>
 
                       <tr>
@@ -37,19 +37,19 @@
                         <th>Ticket Type</th>
                         <th>Ticket Fees</th>
 						<th>Registered at</th>
-						<th>Updated at</th>
 						<!-- <th>Action</th> -->
                       </tr>
                     <tbody>
+                    
 					
 					@foreach ($booking as $booking)
                       <tr>
-                          <td>{{ $booking->username }}</td>
+                      
+                        <td>{{ $booking->username }}</td>
                         <td>{{$booking->event_name}}</td>
 						<td>{{ $booking->ticket_type }}</td>
 						<td>{{ $booking->fees }}</td>
 						<td>{{ $booking->created_at }}</td>
-						<td>{{ $booking->updated_at }}</td>
 						<!-- <td><a class="btn btn-danger" onclick="return myFunction1();" href='#'>Delete</a></td> -->
 					  </tr>
 					  @endforeach
@@ -72,7 +72,8 @@
 					
 					@foreach ($booking as $booking)
                       <tr>
-                          <td>{{ $booking->username }}</td>
+                      
+                          <td>{{$loginUser->username}}</td>
 						<td>{{ $booking->event_name }}</td>
                         <td>{{ $booking->ticket_type }}</td>
                         <td>{{$booking->fees}}</td>

@@ -9,20 +9,20 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      <img src="{{ asset('assets/img/fas1.jpg') }}" alt="..."  style="width:100%; height:500px">
+      <img src="{{ asset('assets/img/festival1.jpg') }}" alt="..."  style="width:100%; height:700px">
       <div class="carousel-caption">
         ...
       </div>
     </div>
     <div class="item">
-      <img src="{{ asset('assets/img/fas2.jpeg') }}" alt="..."  style="width:100%; height:500px">
+      <img src="{{ asset('assets/img/festival2.jpg') }}" alt="..."  style="width:100%; height:700px">
       <div class="carousel-caption">
         ...
       </div>
     </div>
 
     <div class="item">
-      <img src="{{ asset('assets/img/fas3.jpg') }}" alt="..."  style="width:100%; height:500px">
+      <img src="{{ asset('assets/img/festival3.jpg') }}" alt="..."  style="width:100%; height:700px">
       <div class="carousel-caption">
         ...
       </div>

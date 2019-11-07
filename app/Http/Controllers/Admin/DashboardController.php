@@ -35,7 +35,7 @@ class DashboardController extends Controller
 
     public function registeredit(Request $request, $id){
         if(!Gate::allows('isAdmin')){
-            abort(404,"Sorry, You can do this action");
+            abort(404,"Sorry, You cannot do this action");
         }
         
         $users = User::findOrFail($id);
@@ -44,7 +44,7 @@ class DashboardController extends Controller
 
     public function registerupdate(Request $request, $id){
         if(!Gate::allows('isAdmin')){
-            abort(404,"Sorry, You can do this action");
+            abort(404,"Sorry, You cannot do this action");
         }
         $users = User::find($id);
         $users->username=$request->input('username');
@@ -56,7 +56,7 @@ class DashboardController extends Controller
 
     public function registerdelete($id){
         if(!Gate::allows('isAdmin')){
-            abort(404,"Sorry, You can do this action");
+            abort(404,"Sorry, You cannot do this action");
         }
         
         $users = User::findOrFail($id);

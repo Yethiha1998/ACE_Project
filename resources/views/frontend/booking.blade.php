@@ -99,7 +99,7 @@
                         <td>
                             <select class="form-control" name="ticketid" id="ticketid">
 							<!-- <option value="" selected disabled>Select Course Name</option> -->
-
+                                
                                 @foreach($tickets as $ticket)
                                     <option value="{{$ticket->ticketid}}">{{$ticket->ticket_type}} ==== {{$ticket->price}} - KS</option>
                                 @endforeach

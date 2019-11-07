@@ -11,7 +11,7 @@ class BookinglistController extends Controller
     {
         $loginUser = Auth::user();
 
-        if ($loginUser->role == 2) {
+        if ($loginUser->role == 2 || $loginUser->role == 1) {
             $booking = DB::select('SELECT b.*,u.username AS username,e.event_name AS event_name,t.ticket_type AS ticket_type
                                 FROM 
                                 booking AS b 
@@ -23,6 +23,7 @@ class BookinglistController extends Controller
                                 ON b.ticketid= t.ticketid');
         }
         else{
+            
             $loginUserId = $loginUser->id;
             
             $booking = DB::select('SELECT b.*,u.username AS username,e.event_name AS event_name,t.ticket_type AS ticket_type
@@ -40,5 +41,7 @@ class BookinglistController extends Controller
         return view('frontend.index')
             ->with('booking', $booking);
     }
+
+    
 
 }
